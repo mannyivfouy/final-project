@@ -5,21 +5,25 @@ const cors = require("cors");
 const connectDB = require("./Config/db");
 const PORT = process.env.PORT || 5000;
 
+const students = require("./routes/student.routes");
+
 connectDB();
 app.use(express.json());
 app.use(
-    cors({
-        origin: 'http://localhost:4200',
-        allowedHeaders: ["Content-Type", "Authorization"]
-    })
-)
+  cors({
+    origin: "http://localhost:4200",
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.get("/", (req, res) => {
   res.send(`🏃🏻‍♂️ API Is Running...`);
 });
 
 //!
+app.use("/api/students", students)
+//!
 
 app.listen(PORT, () => {
-    console.log(`🚀 Server Running On ===> http://localhost:${PORT}`)
-})
+  console.log(`🚀 Server Running At ===> http://localhost:${PORT}`);
+});
