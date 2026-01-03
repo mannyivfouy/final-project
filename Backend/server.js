@@ -6,6 +6,7 @@ const connectDB = require("./Config/db");
 const PORT = process.env.PORT || 5000;
 
 const students = require("./routes/student.routes");
+const users = require("./routes/user.routes");
 
 connectDB();
 app.use(express.json());
@@ -21,7 +22,8 @@ app.get("/", (req, res) => {
 });
 
 //!
-app.use("/api/students", students)
+app.use("/api/students", students);
+app.use("/api/users", users);
 //!
 
 app.listen(PORT, () => {
