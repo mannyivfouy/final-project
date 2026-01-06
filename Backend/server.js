@@ -7,12 +7,14 @@ const PORT = process.env.PORT || 5000;
 
 const students = require("./routes/student.routes");
 const users = require("./routes/user.routes");
+const login = require("./routes/login.routes");
+const allowedOrigins = ["http://localhost:4200", "http://localhost:4900"];
 
 connectDB();
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:4200",
+    origin: allowedOrigins,
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
@@ -24,6 +26,7 @@ app.get("/", (req, res) => {
 //!
 app.use("/api/students", students);
 app.use("/api/users", users);
+app.use("/api/login", login);
 //!
 
 app.listen(PORT, () => {
